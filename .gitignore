@@ -1,0 +1,12 @@
+# VSCode
+.vscode
+
+# rojo and Luau Language Server
+sourcemap.json
+
+# roblox
+*.rbxl
+*.rbxlx
+*.rbxm
+*_.rbxmx
+*.lock
