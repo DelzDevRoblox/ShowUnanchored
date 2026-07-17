@@ -1,0 +1,10 @@
+{
+    "Lua.diagnostics.globals": [
+        "game",
+        "script",
+        "plugin"
+    ],
+    "Lua.diagnostics.disable": [
+        "unused-label"
+    ]
+}
