@@ -29,7 +29,7 @@ button.ClickableWhenViewportHidden = true
 
 local function calcBillboardSize(): UDim2
   -- Calculates the billboard size based on the current ViewportSize.
-  -- Choosed not to watch ViewportSize changes.
+  -- Chose not to watch ViewportSize changes.
   local cam = workspace.CurrentCamera
   if not cam then return UDim2.fromOffset(10, 10) end -- fallback billboard size
   local size = math.round(cam.ViewportSize.X / 100)
