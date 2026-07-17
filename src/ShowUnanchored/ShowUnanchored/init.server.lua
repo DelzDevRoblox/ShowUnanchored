@@ -9,20 +9,27 @@
 
 ]]
 
-local CollectionService = game:GetService("CollectionService")
+local CoreGui = game:GetService("CoreGui")
 
 local toolbar = plugin:CreateToolbar("ShowUnanchoredPlugin")
+
+local PLUGIN_VERSION = "1.0.0"
 
 local ICON_SHOW = "rbxassetid://93917691212732"
 local ICON_HIDE = "rbxassetid://101655275937723"
 local ICON_GIZMO = "rbxassetid://94876904753668"
-local TAG = "ToggleUnanchoredTBOFD2026"
+local BILLBOARD_NAME = "ShowUnanchored_Marker"
 
 local isOn = false
 
+local pluginStorage: ScreenGui = CoreGui:FindFirstChild("ShowUnanchoredPlugin") :: ScreenGui
+  or Instance.new("ScreenGui")
+pluginStorage.Name = "ShowUnanchoredPlugin"
+pluginStorage.Parent = CoreGui
+
 local button: PluginToolbarButton = toolbar:CreateButton(
-  "Show unanchored",
-  "Toggles viewing unanchored parts.",
+  "Show Unanchored",
+  "Toggles viewing unanchored parts.\nv" .. PLUGIN_VERSION,
   ICON_HIDE
 )
 button.ClickableWhenViewportHidden = true
@@ -32,20 +39,17 @@ local function calcBillboardSize(): UDim2
   -- Chose not to watch ViewportSize changes.
   local cam = workspace.CurrentCamera
   if not cam then return UDim2.fromOffset(10, 10) end -- fallback billboard size
-  local size = math.round(cam.ViewportSize.X / 100)
+  local size = math.round(cam.ViewportSize.X / 75)
   return UDim2.fromOffset(size, size)
 end
 
-local function putTag(part: BasePart, billboardSize: UDim2)
-  if part:FindFirstChild("UnanchoredBillboardTBOFD2026") then
-    return
-  end
-
-  local billboard = script.UnanchoredBillboardTBOFD2026:Clone()
+local function placeMarker(part: BasePart, billboardSize: UDim2)
+  local billboard = script:FindFirstChild(BILLBOARD_NAME):Clone() :: BillboardGui
   billboard.Size = billboardSize
-  billboard.Icon.Image = ICON_GIZMO
-  billboard:AddTag(TAG)
-  billboard.Parent = part
+  billboard.Adornee = part
+  billboard.Parent = pluginStorage
+  local icon = billboard:FindFirstChild("Icon") :: ImageLabel
+  icon.Image = ICON_GIZMO
 end
 
 local function onPluginButtonClicked()
@@ -55,7 +59,7 @@ local function onPluginButtonClicked()
   for _, instance: Instance in pairs(workspace:GetDescendants()) do
     if instance:IsA("BasePart") then
       if instance.Anchored == false then
-        putTag(instance, billboardSize)
+        placeMarker(instance, billboardSize)
       end
     end
   end
@@ -63,12 +67,7 @@ end
 
 local function onPluginUndoClicked()
   -- deletes all billboards cloned by the show button
-  -- by search for the billboardgui unique tag
-  for _, instance: Instance in pairs(CollectionService:GetTagged(TAG)) do
-    if instance:IsA("BillboardGui") and instance.Name == "UnanchoredBillboardTBOFD2026" then
-      instance:Destroy()
-    end
-  end
+  pluginStorage:ClearAllChildren()
 end
 
 button.Click:Connect(function()

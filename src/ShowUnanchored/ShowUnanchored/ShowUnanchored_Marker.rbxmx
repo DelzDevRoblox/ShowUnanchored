@@ -2,7 +2,7 @@
 	<Meta name="ExplicitAutoJoints">true</Meta>
 	<External>null</External>
 	<External>nil</External>
-	<Item class="BillboardGui" referent="RBX74FCA3ED0C0642C9844393E51B255C8C">
+	<Item class="BillboardGui" referent="RBX73D7B0B1801B4914AA3ABA648C32B8EF">
 		<Properties>
 			<bool name="Active">true</bool>
 			<Ref name="Adornee">null</Ref>
@@ -61,7 +61,7 @@
 			<int64 name="SourceAssetId">-1</int64>
 			<SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString>
 		</Properties>
-		<Item class="ImageLabel" referent="RBX01EB9C42B6DA4988BF87F74C0BB1529A">
+		<Item class="ImageLabel" referent="RBX3FB659BA222F4490B40B02B449745786">
 			<Properties>
 				<Content name="Image"><null></null></Content>
 				<Color3 name="ImageColor3">
