@@ -1,0 +1,19 @@
+{
+  "name": "ShowUnanchored",
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+      "Plugins": {
+        "$className": "Folder",
+          "ShowUnanchored": {
+          "$path": "src/ShowUnanchored"
+        }
+      }
+    }
+  },
+  "globIgnorePaths": [
+    "*.lock",
+    "*.toml"
+  ]
+}
